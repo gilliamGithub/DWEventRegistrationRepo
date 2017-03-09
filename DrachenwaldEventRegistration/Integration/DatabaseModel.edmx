@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EventRegistrationDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EventRegistrationDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -34,6 +34,7 @@
           <Property Name="Mandatory" Type="bit" Nullable="false" />
           <Property Name="DataValues" Type="nvarchar(max)" />
           <Property Name="LabelText" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="FormItemTemplate">
           <Key>
@@ -44,6 +45,7 @@
           <Property Name="Mandatory" Type="bit" Nullable="false" />
           <Property Name="DataValues" Type="nvarchar(max)" />
           <Property Name="LabelText" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Registration">
           <Key>
@@ -96,8 +98,7 @@
           <EntitySet Name="RegistrationFormLayoutTemplate" EntityType="Self.RegistrationFormLayoutTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegistrationFormTemplate" EntityType="Self.RegistrationFormTemplate" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EventRegistrationDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -130,6 +131,7 @@
           <Property Name="Mandatory" Type="Boolean" Nullable="false" />
           <Property Name="DataValues" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LabelText" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="FormItemTemplate">
           <Key>
@@ -140,6 +142,7 @@
           <Property Name="Mandatory" Type="Boolean" Nullable="false" />
           <Property Name="DataValues" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LabelText" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Registration">
           <Key>
@@ -223,6 +226,7 @@
           <EntitySetMapping Name="FormItem">
             <EntityTypeMapping TypeName="EventRegistrationDBModel.FormItem">
               <MappingFragment StoreEntitySet="FormItem">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="FormItemId" ColumnName="FormItemId" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
@@ -234,6 +238,7 @@
           <EntitySetMapping Name="FormItemTemplate">
             <EntityTypeMapping TypeName="EventRegistrationDBModel.FormItemTemplate">
               <MappingFragment StoreEntitySet="FormItemTemplate">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="FormItemTemplateId" ColumnName="FormItemTemplateId" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />

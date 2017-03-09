@@ -19,5 +19,6 @@ namespace DrachenwaldEventRegistration.Integration
         public bool Mandatory { get; set; }
         public string DataValues { get; set; }
         public string LabelText { get; set; }
+        public int CategoryId { get; set; }
     }
 }
