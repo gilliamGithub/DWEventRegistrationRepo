@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EventRegistrationDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="RegistrationStart" Type="datetime" Nullable="false" />
+          <Property Name="RegistrationEnd" Type="datetime" Nullable="false" />
+          <Property Name="AdminEmail" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CancellationLastDate" Type="datetime" />
+          <Property Name="ContactInformation" Type="nvarchar" MaxLength="500" />
+          <Property Name="Year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormItem">
+          <Key>
+            <PropertyRef Name="FormItemId" />
+          </Key>
+          <Property Name="FormItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Mandatory" Type="bit" Nullable="false" />
+          <Property Name="DataValues" Type="nvarchar(max)" />
+          <Property Name="LabelText" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormItemTemplate">
+          <Key>
+            <PropertyRef Name="FormItemTemplateId" />
+          </Key>
+          <Property Name="FormItemTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Mandatory" Type="bit" Nullable="false" />
+          <Property Name="DataValues" Type="nvarchar(max)" />
+          <Property Name="LabelText" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="RegistrationId" />
+          </Key>
+          <Property Name="RegistrationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RegistrationFormId" Type="int" Nullable="false" />
+          <Property Name="RegistrationDetails" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegistrationForm">
+          <Key>
+            <PropertyRef Name="RegistrationFormId" />
+          </Key>
+          <Property Name="RegistrationFormId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegistrationFormLayout">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormItemId" Type="int" Nullable="false" />
+          <Property Name="RegistrationFormId" Type="int" Nullable="false" />
+          <Property Name="DisplayOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegistrationFormLayoutTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormItemTemplateId" Type="int" Nullable="false" />
+          <Property Name="RegistrationFormTemplateId" Type="int" Nullable="false" />
+          <Property Name="DisplayOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegistrationFormTemplate">
+          <Key>
+            <PropertyRef Name="RegistrationFormTemplateId" />
+          </Key>
+          <Property Name="RegistrationFormTemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="EventRegistrationDBModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormItem" EntityType="Self.FormItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormItemTemplate" EntityType="Self.FormItemTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistrationForm" EntityType="Self.RegistrationForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistrationFormLayout" EntityType="Self.RegistrationFormLayout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistrationFormLayoutTemplate" EntityType="Self.RegistrationFormLayoutTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistrationFormTemplate" EntityType="Self.RegistrationFormTemplate" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EventRegistrationDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="Guid" Nullable="false" />
+          <Property Name="EventName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RegistrationStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RegistrationEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AdminEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CancellationLastDate" Type="DateTime" Precision="3" />
+          <Property Name="ContactInformation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormItem">
+          <Key>
+            <PropertyRef Name="FormItemId" />
+          </Key>
+          <Property Name="FormItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Mandatory" Type="Boolean" Nullable="false" />
+          <Property Name="DataValues" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LabelText" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormItemTemplate">
+          <Key>
+            <PropertyRef Name="FormItemTemplateId" />
+          </Key>
+          <Property Name="FormItemTemplateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Mandatory" Type="Boolean" Nullable="false" />
+          <Property Name="DataValues" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LabelText" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="RegistrationId" />
+          </Key>
+          <Property Name="RegistrationId" Type="Guid" Nullable="false" />
+          <Property Name="RegistrationFormId" Type="Int32" Nullable="false" />
+          <Property Name="RegistrationDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegistrationForm">
+          <Key>
+            <PropertyRef Name="RegistrationFormId" />
+          </Key>
+          <Property Name="RegistrationFormId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegistrationFormLayout">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormItemId" Type="Int32" Nullable="false" />
+          <Property Name="RegistrationFormId" Type="Int32" Nullable="false" />
+          <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegistrationFormLayoutTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormItemTemplateId" Type="Int32" Nullable="false" />
+          <Property Name="RegistrationFormTemplateId" Type="Int32" Nullable="false" />
+          <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegistrationFormTemplate">
+          <Key>
+            <PropertyRef Name="RegistrationFormTemplateId" />
+          </Key>
+          <Property Name="RegistrationFormTemplateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="EventRegistrationDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Event" EntityType="Self.Event" />
+          <EntitySet Name="FormItem" EntityType="Self.FormItem" />
+          <EntitySet Name="FormItemTemplate" EntityType="Self.FormItemTemplate" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" />
+          <EntitySet Name="RegistrationForm" EntityType="Self.RegistrationForm" />
+          <EntitySet Name="RegistrationFormLayout" EntityType="Self.RegistrationFormLayout" />
+          <EntitySet Name="RegistrationFormLayoutTemplate" EntityType="Self.RegistrationFormLayoutTemplate" />
+          <EntitySet Name="RegistrationFormTemplate" EntityType="Self.RegistrationFormTemplate" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EventRegistrationDBModelStoreContainer" CdmEntityContainer="EventRegistrationDB">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="EventRegistrationDBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Event">
+            <EntityTypeMapping TypeName="EventRegistrationDBModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="RegistrationStart" ColumnName="RegistrationStart" />
+                <ScalarProperty Name="RegistrationEnd" ColumnName="RegistrationEnd" />
+                <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+                <ScalarProperty Name="CancellationLastDate" ColumnName="CancellationLastDate" />
+                <ScalarProperty Name="ContactInformation" ColumnName="ContactInformation" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormItem">
+            <EntityTypeMapping TypeName="EventRegistrationDBModel.FormItem">
+              <MappingFragment StoreEntitySet="FormItem">
+                <ScalarProperty Name="FormItemId" ColumnName="FormItemId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+                <ScalarProperty Name="DataValues" ColumnName="DataValues" />
+                <ScalarProperty Name="LabelText" ColumnName="LabelText" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormItemTemplate">
+            <EntityTypeMapping TypeName="EventRegistrationDBModel.FormItemTemplate">
+              <MappingFragment StoreEntitySet="FormItemTemplate">
+                <ScalarProperty Name="FormItemTemplateId" ColumnName="FormItemTemplateId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+                <ScalarProperty Name="DataValues" ColumnName="DataValues" />
+                <ScalarProperty Name="LabelText" ColumnName="LabelText" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registration">
+            <EntityTypeMapping TypeName="EventRegistrationDBModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+                <ScalarProperty Name="RegistrationFormId" ColumnName="RegistrationFormId" />
+                <ScalarProperty Name="RegistrationDetails" ColumnName="RegistrationDetails" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationForm">
+            <EntityTypeMapping TypeName="EventRegistrationDBModel.RegistrationForm">
+              <MappingFragment StoreEntitySet="RegistrationForm">
+                <ScalarProperty Name="RegistrationFormId" ColumnName="RegistrationFormId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationFormLayout">
+            <EntityTypeMapping TypeName="EventRegistrationDBModel.RegistrationFormLayout">
+              <MappingFragment StoreEntitySet="RegistrationFormLayout">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FormItemId" ColumnName="FormItemId" />
+                <ScalarProperty Name="RegistrationFormId" ColumnName="RegistrationFormId" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationFormLayoutTemplate">
+            <EntityTypeMapping TypeName="EventRegistrationDBModel.RegistrationFormLayoutTemplate">
+              <MappingFragment StoreEntitySet="RegistrationFormLayoutTemplate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FormItemTemplateId" ColumnName="FormItemTemplateId" />
+                <ScalarProperty Name="RegistrationFormTemplateId" ColumnName="RegistrationFormTemplateId" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationFormTemplate">
+            <EntityTypeMapping TypeName="EventRegistrationDBModel.RegistrationFormTemplate">
+              <MappingFragment StoreEntitySet="RegistrationFormTemplate">
+                <ScalarProperty Name="RegistrationFormTemplateId" ColumnName="RegistrationFormTemplateId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
